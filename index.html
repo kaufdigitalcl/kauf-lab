@@ -47,16 +47,117 @@
       margin: 2rem auto 0;
       opacity: 0.3;
     }
+
+    footer {
+      position: fixed;
+      bottom: 1.5rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    footer a {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: #e8e8e8;
+    }
+
+    .sep {
+      color: #333;
+      font-size: 0.75rem;
+      margin: 0 0.6rem;
+    }
+
+    h1 {
+      cursor: default;
+      user-select: none;
+    }
+
+    #easter-egg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeIn 0.3s ease;
+    }
+
+    #easter-egg.visible {
+      display: flex;
+    }
+
+    #easter-egg p {
+      font-size: 1.8rem;
+      animation: bounce 0.6s ease infinite alternate;
+    }
+
+    #easter-egg small {
+      color: #555;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-12px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>
+    <h1 id="titulo">
       hola, soy <span class="highlight">nico</span><br>
       esto es mi <span class="highlight">laboratorio</span><br>
       y soy <span class="highlight">bakana</span>
     </h1>
     <span class="dot"></span>
   </div>
+
+  <footer>
+    <a href="https://www.linkedin.com/in/nicolas-cardenas-9907263b3/" target="_blank" rel="noopener">linkedin</a>
+    <span class="sep">·</span>
+    <a href="https://www.instagram.com/kauf.digital/" target="_blank" rel="noopener">instagram</a>
+    <span class="sep">·</span>
+    <a href="https://wa.me/56939080297" target="_blank" rel="noopener">whatsapp</a>
+  </footer>
+
+  <div id="easter-egg">
+    <p>🤖 la IA ya cerró la venta<br>mientras leías esto.</p>
+    <small>y encima pidió referidos &nbsp;·&nbsp; click para cerrar</small>
+  </div>
+
+  <script>
+    let clicks = 0;
+    let timer;
+
+    document.getElementById('titulo').addEventListener('click', () => {
+      clicks++;
+      clearTimeout(timer);
+      timer = setTimeout(() => { clicks = 0; }, 800);
+
+      if (clicks >= 3) {
+        clicks = 0;
+        document.getElementById('easter-egg').classList.add('visible');
+      }
+    });
+
+    document.getElementById('easter-egg').addEventListener('click', () => {
+      document.getElementById('easter-egg').classList.remove('visible');
+    });
+  </script>
 </body>
 </html>
