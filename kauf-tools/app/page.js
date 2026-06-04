@@ -36,18 +36,16 @@ export default function HomePage() {
     setIsFormOpen(false);
   }
 
-  function handleSubmit(form) {
-    if (editingCall) {
-      updateCall(editingCall.id, form);
-    } else {
-      addCall(form);
-    }
-    closeForm();
+  async function handleSubmit(form) {
+    const ok = editingCall
+      ? await updateCall(editingCall.id, form)
+      : await addCall(form);
+    if (ok) closeForm();
   }
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
     if (!confirm("¿Eliminar esta llamada?")) return;
-    deleteCall(id);
+    await deleteCall(id);
   }
 
   function clearFilters() {
