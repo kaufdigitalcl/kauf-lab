@@ -6,6 +6,7 @@ import { CallList } from "./CallList";
 import { CallForm } from "./CallForm";
 import { CallStats } from "./CallStats";
 import { CallFilters } from "./CallFilters";
+import { CallCharts } from "./CallCharts";
 
 export default function HomePage() {
   const { calls, hydrated, addCall, updateCall, deleteCall } = useCalls();
@@ -65,6 +66,7 @@ export default function HomePage() {
       {hydrated && (
         <>
           <CallStats calls={calls} />
+          <CallCharts calls={calls} />
           <CallFilters
             filterPaso={filterPaso}
             setFilterPaso={setFilterPaso}
